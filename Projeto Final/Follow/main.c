@@ -12,6 +12,7 @@ int main() {
     float erro = 0.0, erro_ant = 0.0; 
     int16_t velE, velD;
     int curva = 0;
+    int esta_na_area_inicial = 1;
     int volta = 0;
 
     int sensores[NUMSENSORS];
@@ -59,6 +60,11 @@ int main() {
         //Deteccao de curva (apenas o sensor 0)
         if (sensores[0] && !sensores[6]) {
             curva = !curva; //1 no inicio da curva, 0 no final
+        }
+		
+	//Deteccao de area inicial
+        if (!sensores[0] && sensores[6]) {
+            esta_na_area = !esta_na_area_inicial; //1 no inicio da curva, 0 no final
         }
 
         //P = Kp * (Target - Atual); Target == 0
